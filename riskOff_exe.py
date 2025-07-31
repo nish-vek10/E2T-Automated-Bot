@@ -9,9 +9,9 @@ def main():
     risk_percent = 0.25
 
     assets = [
-        ("NDX", mt5.ORDER_TYPE_SELL, 1000),
-        ("SP500", mt5.ORDER_TYPE_SELL, 500),
-        ("GDAXI", mt5.ORDER_TYPE_SELL, 1000),
+        ("NAS100.i", mt5.ORDER_TYPE_SELL, 1000),
+        ("SP500.i", mt5.ORDER_TYPE_SELL, 500),
+        ("GER40.i", mt5.ORDER_TYPE_SELL, 1000),
         ("USDJPY", mt5.ORDER_TYPE_BUY, 150),
         ("CHFJPY", mt5.ORDER_TYPE_BUY, 150),
         ("XAUUSD", mt5.ORDER_TYPE_BUY, 5000),

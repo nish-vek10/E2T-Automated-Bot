@@ -67,7 +67,7 @@
  [],
  False,
  False,
- 1753870149,
+ 1753951718,
  [('run.exe',
    'C:\\Users\\anish\\PycharmProjects\\Educate2Trade\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')],

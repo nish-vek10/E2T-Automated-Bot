@@ -45,7 +45,6 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
 )
-
 coll = COLLECT(
     exe,
     a.binaries,
