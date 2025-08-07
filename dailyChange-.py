@@ -16,9 +16,9 @@ def main():
     risk_percent = 0.25
 
     assets = [
-        ("EURUSD", mt5.ORDER_TYPE_BUY, 150),
+        ("UK100.i", mt5.ORDER_TYPE_SELL, 1000),
         ("GBPUSD", mt5.ORDER_TYPE_BUY, 150),
-        ("USDJPY", mt5.ORDER_TYPE_SELL, 150),
+        ("EURGBP", mt5.ORDER_TYPE_SELL, 150),
     ]
 
     for symbol, order_type, sl in assets:
