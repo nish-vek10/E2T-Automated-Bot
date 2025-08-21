@@ -1,8 +1,8 @@
 # ==== DAILY CHANGE + ==== #
 
 """
-ISM Services PMI
-Forecast: 51.5      Previous: 50.8
+Core CPI m/m
+Forecast: 0.3%      Previous: 0.2%
 
 'Actual' greater than 'Forecast' is good for currency
 """
@@ -16,9 +16,9 @@ def main():
     risk_percent = 0.25
 
     assets = [
-        ("UK100.i", mt5.ORDER_TYPE_BUY, 1000),
-        ("GBPUSD", mt5.ORDER_TYPE_SELL, 150),
-        ("EURGBP", mt5.ORDER_TYPE_BUY, 150),
+        ("SP500.i", mt5.ORDER_TYPE_SELL, 1000),
+        ("EURUSD", mt5.ORDER_TYPE_SELL, 150),
+        ("USDJPY", mt5.ORDER_TYPE_BUY, 150),
     ]
 
     for symbol, order_type, sl in assets:

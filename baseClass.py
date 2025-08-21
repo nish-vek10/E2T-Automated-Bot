@@ -7,6 +7,7 @@
 ######   B-A-S-E  C-L-A-S-S   ######
 
 import MetaTrader5 as mt5
+import time
 
 class MT5Trader:
     MAGIC_NUMBER = 123456 # Unique identifier for this EA (Expert Advisor)
@@ -39,6 +40,28 @@ class MT5Trader:
             print(f"[ERROR] {symbol_info.name}: SL too close ({sl_points}). Adjusting to min allowed: {min_sl}")
             return min_sl
         return sl_points
+
+    def _ensure_symbol_ready(self, symbol):
+        info = mt5.symbol_info(symbol)
+        if info is None:
+            print(f"[ERROR] {symbol}: No symbol_info.")
+            return None
+        if not info.visible:
+            mt5.symbol_select(symbol, True)
+        return mt5.symbol_info(symbol)  # refresh
+
+    def _wait_fresh_tick(self, symbol, timeout_ms=500):
+        """Wait for a fresh tick up to timeout_ms; return tick or None."""
+        import time
+        start = time.time()
+        last_time = 0
+        while (time.time() - start) * 1000 < timeout_ms:
+            tick = mt5.symbol_info_tick(symbol)
+            if tick and tick.time_msc and tick.time_msc != last_time:
+                return tick
+            last_time = tick.time_msc if tick else last_time
+            time.sleep(0.01)  # 10ms
+        return mt5.symbol_info_tick(symbol)
 
     """
             Calculate the lot size based on:
@@ -124,7 +147,7 @@ class MT5Trader:
             "volume": lot,
             "type": order_type,
             "price": price,
-            "deviation": 20,
+            "deviation": 250,
             "sl": sL,
             "magic": self.MAGIC_NUMBER,
             "comment": comment,
@@ -185,7 +208,7 @@ class MT5Trader:
             "type": order_type,
             "position": ticket,
             "price": price,
-            "deviation": 20,
+            "deviation": 250,
             "magic": self.MAGIC_NUMBER,
             "comment": "PartialClose50",
             "type_time": mt5.ORDER_TIME_GTC,
@@ -231,7 +254,7 @@ class MT5Trader:
                 "type": order_type,
                 "position": ticket,
                 "price": price,
-                "deviation": 20,
+                "deviation": 250,
                 "magic": self.MAGIC_NUMBER,
                 "comment": "CloseAllScript",
                 "type_time": mt5.ORDER_TIME_GTC,
